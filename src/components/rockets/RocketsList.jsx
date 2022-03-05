@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchRockets } from '../../store/rockets';
+import Rocket from './Rocket';
 
 const RocketsList = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,7 @@ const RocketsList = () => {
       <ul>
         {
           rockets.map((rocket) => (
-            <div key={rocket.id}>
-              <img src={rocket.rocketImage} alt="rocket" />
-              <h2>{rocket.rocketName}</h2>
-              <p>{rocket.description}</p>
-            </div>
+            <Rocket key={rocket.id} rocket={rocket} />
           ))
         }
       </ul>
