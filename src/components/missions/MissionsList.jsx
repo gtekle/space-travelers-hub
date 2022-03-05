@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-const MissionsList = () => {
-  return (
-    <div>MissionsList</div>
-  )
-}
+const MissionsList = () => (
+  <div>MissionsList</div>
+);
 
-export default MissionsList
+export default MissionsList;

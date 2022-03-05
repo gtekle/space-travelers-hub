@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import {
   Container, Navbar, Nav,
 } from 'react-bootstrap';
@@ -17,9 +18,15 @@ const Header = () => (
       <Navbar.Toggle />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="#home">Rockets</Nav.Link>
-          <Nav.Link href="#link">Missions</Nav.Link>
-          <Nav.Link href="#link">My Profile</Nav.Link>
+          <LinkContainer to="/">
+            <Nav.Link>Rockets</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/missions">
+            <Nav.Link>Missions</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/my-profile">
+            <Nav.Link>My Profile</Nav.Link>
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Container>
