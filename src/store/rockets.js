@@ -4,6 +4,8 @@ import {
 import axios from 'axios';
 
 const rocketsFetched = createAction('rocketsFetched');
+export const reserveRocket = createAction('rockets/rocketReserved');
+export const cancelRocketReservation = createAction('rockets/rocketReservationCanceled');
 
 export const fetchRockets = createAsyncThunk(
   'rockets/fetchRockets',
@@ -18,7 +20,6 @@ export const fetchRockets = createAsyncThunk(
         rocketImage: rocket.flickr_images[0],
       }
     ));
-    console.log(rockets);
     dispatch({
       type: rocketsFetched.type,
       payload: rockets,
@@ -29,9 +30,17 @@ export const fetchRockets = createAsyncThunk(
 const rocketsReducer = createReducer([], {
   // key: value pairs
   // actions: functions (event => event handler)
-  rocketsFetched: (rockets, action) => {
+  [rocketsFetched.type]: (rockets, action) => {
     rockets.push(...action.payload);
   },
+  [reserveRocket.type]: (rockets, action) => rockets.map((rocket) => {
+    if (rocket.id === action.payload) return { ...rocket, reserved: true };
+    return rocket;
+  }),
+  [cancelRocketReservation.type]: (rockets, action) => rockets.map((rocket) => {
+    if (rocket.id === action.payload) return { ...rocket, reserved: false };
+    return rocket;
+  }),
 });
 
 export default rocketsReducer;

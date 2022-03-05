@@ -1,18 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Card, Row, Col, Badge, Button,
 } from 'react-bootstrap';
+import { reserveRocket, cancelRocketReservation } from '../../store/rockets';
 
 const Rocket = ({ rocket }) => {
+  const dispatch = useDispatch();
+  const rockets = useSelector((state) => state);
   const {
     id, rocketName, description, rocketImage, reserved,
   } = rocket;
-  const handleReserve = () => {
+  const handleReserve = (e) => {
     if (!reserved) {
-      console.log('reserved...');
+      dispatch(reserveRocket(+e.target.id));
+      console.log('reserved...', rockets);
     } else {
-      console.log('canceled...');
+      dispatch(cancelRocketReservation(+e.target.id));
+      console.log('cancel reservation...', rockets);
     }
   };
   return (
